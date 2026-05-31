@@ -3,6 +3,7 @@ from typing import List
 from .database import get_session
 from sqlmodel import Session
 from .crud import list_policies, get_policy, get_policies_by_ids, create_policy
+from .external_insurance import fetch_live_policies, is_configured as live_provider_configured
 from .models import Policy
 from pydantic import BaseModel
 
@@ -17,7 +18,23 @@ class CompareResponse(BaseModel):
 
 
 @router.get("/policies", response_model=List[Policy])
-def api_list_policies(page: int = 1, page_size: int = 20, q: str | None = None, category: str | None = None, tags: str | None = None, session: Session = Depends(get_session)):
+def api_list_policies(
+    page: int = 1,
+    page_size: int = 20,
+    q: str | None = None,
+    category: str | None = None,
+    tags: str | None = None,
+    live: bool = False,
+    session: Session = Depends(get_session),
+):
+    if live:
+        if not live_provider_configured():
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="Live insurance provider is not configured.",
+            )
+        return fetch_live_policies(q=q, category=category, page=page, page_size=page_size)
+
     offset = (page - 1) * page_size
     tag_list = tags.split(",") if tags else None
     results = list_policies(session, q=q, category=category, tags=tag_list, offset=offset, limit=page_size)

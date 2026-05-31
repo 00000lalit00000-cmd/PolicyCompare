@@ -20,6 +20,20 @@ SAMPLE = [
         "source_url": "https://example.com/policies/health-shield-plus"
     },
     {
+        "title": "Wellness Family Care",
+        "description": "Family health plan with outpatient and critical illness coverage.",
+        "category": "Health Insurance",
+        "effective_date": date(2024, 2, 1),
+        "issuer": "FamilyHealth Insurance",
+        "tags": ["family", "wellness", "critical illness"],
+        "sections": [
+            {"title": "Family Cover", "content": "Covers up to 5 family members with cashless hospitalization."},
+            {"title": "Wellness", "content": "Annual health check-ups and wellness discounts."}
+        ],
+        "last_updated": "2024-02-01",
+        "source_url": "https://example.com/policies/wellness-family-care"
+    },
+    {
         "title": "Secure Term Plan",
         "description": "Affordable term life insurance for financial protection of your family.",
         "category": "Term Insurance",
@@ -32,6 +46,20 @@ SAMPLE = [
         ],
         "last_updated": "2023-08-01",
         "source_url": "https://example.com/policies/secure-term-plan"
+    },
+    {
+        "title": "Family Income Shield",
+        "description": "Term cover with income replacement and accidental benefit add-ons.",
+        "category": "Term Insurance",
+        "effective_date": date(2024, 3, 1),
+        "issuer": "SecureLife",
+        "tags": ["life", "income", "term"],
+        "sections": [
+            {"title": "Accidental Benefit", "content": "Additional payout on accidental death."},
+            {"title": "Premium Waiver", "content": "Waives future premiums on critical illness."}
+        ],
+        "last_updated": "2024-03-01",
+        "source_url": "https://example.com/policies/family-income-shield"
     },
     {
         "title": "General Care Policy",
@@ -48,6 +76,20 @@ SAMPLE = [
         "source_url": "https://example.com/policies/general-care-policy"
     },
     {
+        "title": "Secure Accident Guard",
+        "description": "Personal accident coverage for injury, disability, and accidental death.",
+        "category": "General Insurance",
+        "effective_date": date(2024, 4, 15),
+        "issuer": "GuardPlus",
+        "tags": ["accident", "disability", "personal"],
+        "sections": [
+            {"title": "Coverage", "content": "Accidental death, permanent disability, and hospital cash."},
+            {"title": "Support", "content": "24/7 claim assistance and cashless hospitals."}
+        ],
+        "last_updated": "2024-04-15",
+        "source_url": "https://example.com/policies/secure-accident-guard"
+    },
+    {
         "title": "Auto Protect Premium",
         "description": "Car insurance with third-party liability, collision, and theft protection.",
         "category": "Car Insurance",
@@ -60,6 +102,20 @@ SAMPLE = [
         ],
         "last_updated": "2024-04-20",
         "source_url": "https://example.com/policies/auto-protect-premium"
+    },
+    {
+        "title": "City Drive Secure",
+        "description": "Affordable car insurance for city drivers with theft and damage cover.",
+        "category": "Car Insurance",
+        "effective_date": date(2024, 5, 12),
+        "issuer": "UrbanDrive",
+        "tags": ["car", "city", "urban"],
+        "sections": [
+            {"title": "Protection", "content": "Third-party, theft, and own-damage with personal accident."},
+            {"title": "Benefits", "content": "Free roadside assistance and towing aid."}
+        ],
+        "last_updated": "2024-05-12",
+        "source_url": "https://example.com/policies/city-drive-secure"
     },
     {
         "title": "Two-Wheeler Care",
@@ -76,6 +132,20 @@ SAMPLE = [
         "source_url": "https://example.com/policies/two-wheeler-care"
     },
     {
+        "title": "Bike Shield Essential",
+        "description": "Comprehensive bike insurance with liability and theft protection.",
+        "category": "Two Wheeler Insurance",
+        "effective_date": date(2024, 6, 1),
+        "issuer": "MotoSafe",
+        "tags": ["bike", "motorcycle", "two-wheeler"],
+        "sections": [
+            {"title": "Coverage", "content": "Third-party liability, own-damage, and theft cover."},
+            {"title": "Optional", "content": "Personal accident and zero depreciation riders."}
+        ],
+        "last_updated": "2024-06-01",
+        "source_url": "https://example.com/policies/bike-shield-essential"
+    },
+    {
         "title": "Travel Guard Plus",
         "description": "Travel insurance covering medical emergencies, trip cancellation, and baggage loss.",
         "category": "Travel Insurance",
@@ -90,6 +160,20 @@ SAMPLE = [
         "source_url": "https://example.com/policies/travel-guard-plus"
     },
     {
+        "title": "Weekend Trip Saver",
+        "description": "Short-term travel insurance for domestic and international weekend trips.",
+        "category": "Travel Insurance",
+        "effective_date": date(2024, 5, 20),
+        "issuer": "TripSecure",
+        "tags": ["travel", "short-term", "emergency"],
+        "sections": [
+            {"title": "Cover", "content": "Medical emergencies, trip cancellation, and lost baggage."},
+            {"title": "Claims", "content": "Quick online claims within 24 hours."}
+        ],
+        "last_updated": "2024-05-20",
+        "source_url": "https://example.com/policies/weekend-trip-saver"
+    },
+    {
         "title": "Home Secure Policy",
         "description": "Home insurance for fire, theft, and natural disaster damage.",
         "category": "Home Insurance",
@@ -102,6 +186,20 @@ SAMPLE = [
         ],
         "last_updated": "2024-05-20",
         "source_url": "https://example.com/policies/home-secure-policy"
+    },
+    {
+        "title": "Owner's Property Shield",
+        "description": "Property insurance for homeowners against fire, burglary, and water damage.",
+        "category": "Home Insurance",
+        "effective_date": date(2024, 6, 10),
+        "issuer": "PropertyGuard",
+        "tags": ["home", "fire", "burglary"],
+        "sections": [
+            {"title": "Coverage", "content": "Fire, theft, and water damage for the home and contents."},
+            {"title": "Service", "content": "Emergency repairs and claim assistance."}
+        ],
+        "last_updated": "2024-06-10",
+        "source_url": "https://example.com/policies/owners-property-shield"
     }
 ]
 
