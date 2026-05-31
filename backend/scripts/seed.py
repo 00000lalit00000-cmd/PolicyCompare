@@ -1,5 +1,5 @@
 """Seed script for PolicyCompare backend."""
-from sqlmodel import Session
+from sqlmodel import Session, select
 from app.database import engine
 from app.models import Policy
 from datetime import date
@@ -8,7 +8,7 @@ SAMPLE = [
     {
         "title": "Data Protection Policy",
         "description": "Policy describing data protection requirements.",
-        "effective_date": "2024-01-01",
+        "effective_date": date(2024, 1, 1),
         "issuer": "Security",
         "tags": ["security", "data"],
         "sections": [
@@ -21,7 +21,7 @@ SAMPLE = [
     {
         "title": "Acceptable Use Policy",
         "description": "Rules for acceptable use of company resources.",
-        "effective_date": "2023-06-15",
+        "effective_date": date(2023, 6, 15),
         "issuer": "IT",
         "tags": ["it", "usage"],
         "sections": [
@@ -36,6 +36,11 @@ SAMPLE = [
 
 def run():
     with Session(engine) as session:
+        existing = session.exec(select(Policy)).first()
+        if existing:
+            print("Database already has policies; skipping seed.")
+            return
+
         for item in SAMPLE:
             p = Policy(**item)
             session.add(p)
