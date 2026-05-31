@@ -7,6 +7,7 @@ export interface Policy {
   id: string;
   title: string;
   description?: string;
+  category?: string;
   effective_date?: string;
   issuer?: string;
   tags?: string[];

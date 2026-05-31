@@ -2,9 +2,10 @@ import { Policy } from '../types/policy';
 
 const baseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:8000/api';
 
-export async function fetchPolicies(query?: string): Promise<Policy[]> {
+export async function fetchPolicies(query?: string, category?: string): Promise<Policy[]> {
   const url = new URL(`${baseUrl}/policies`);
   if (query) url.searchParams.set('q', query);
+  if (category) url.searchParams.set('category', category);
   const response = await fetch(url.toString());
   if (!response.ok) throw new Error('Failed to load policies');
   return response.json();

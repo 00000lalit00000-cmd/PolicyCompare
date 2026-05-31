@@ -17,10 +17,10 @@ class CompareResponse(BaseModel):
 
 
 @router.get("/policies", response_model=List[Policy])
-def api_list_policies(page: int = 1, page_size: int = 20, q: str | None = None, tags: str | None = None, session: Session = Depends(get_session)):
+def api_list_policies(page: int = 1, page_size: int = 20, q: str | None = None, category: str | None = None, tags: str | None = None, session: Session = Depends(get_session)):
     offset = (page - 1) * page_size
     tag_list = tags.split(",") if tags else None
-    results = list_policies(session, q=q, tags=tag_list, offset=offset, limit=page_size)
+    results = list_policies(session, q=q, category=category, tags=tag_list, offset=offset, limit=page_size)
     return results
 
 

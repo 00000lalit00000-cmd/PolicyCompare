@@ -8,6 +8,7 @@ class Policy(SQLModel, table=True):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()), primary_key=True, index=True)
     title: str
     description: Optional[str] = None
+    category: Optional[str] = None
     effective_date: Optional[date] = None
     issuer: Optional[str] = None
     tags: Optional[List[str]] = Field(default_factory=list, sa_column=Column(JSON))

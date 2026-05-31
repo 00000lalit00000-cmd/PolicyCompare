@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import PolicyListPage from './pages/PolicyListPage';
 import PolicyComparePage from './pages/PolicyComparePage';
+import PolicyListPage from './pages/PolicyListPage';
+import CategoryLandingPage from './pages/CategoryLandingPage';
+import CategoryPage from './pages/CategoryPage';
 import { Policy } from './types/policy';
 import Container from '@mui/material/Container';
 import AppBar from '@mui/material/AppBar';
@@ -42,7 +44,7 @@ function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             PolicyCompare
           </Typography>
-          <Button color="inherit" onClick={() => navigate('/')}>Policy List</Button>
+          <Button color="inherit" onClick={() => navigate('/')}>Categories</Button>
           <Button disabled={selected.length < 2} color="inherit" onClick={() => navigate('/compare')}>
             Compare ({selected.length})
           </Button>
@@ -50,7 +52,8 @@ function App() {
       </AppBar>
       <Container sx={{ mt: 4, mb: 4 }}>
         <Routes>
-          <Route path="/" element={<PolicyListPage selected={selected} onToggle={handleToggle} onCompare={() => navigate('/compare')} onClear={handleClear} />} />
+          <Route path="/" element={<CategoryLandingPage />} />
+          <Route path="/category/:categorySlug" element={<CategoryPage selected={selected} onToggle={handleToggle} onCompare={() => navigate('/compare')} onClear={handleClear} />} />
           <Route path="/compare" element={<PolicyComparePage selected={selected} onClear={handleClear} />} />
         </Routes>
       </Container>

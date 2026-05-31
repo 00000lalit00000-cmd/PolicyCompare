@@ -15,9 +15,11 @@ interface PolicyListPageProps {
   onToggle: (policy: Policy) => void;
   onCompare: () => void;
   onClear: () => void;
+  category?: string;
+  categoryLabel?: string;
 }
 
-export default function PolicyListPage({ selected, onToggle, onCompare, onClear }: PolicyListPageProps) {
+export default function PolicyListPage({ selected, onToggle, onCompare, onClear, category, categoryLabel }: PolicyListPageProps) {
   const [policies, setPolicies] = useState<Policy[]>([]);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -25,21 +27,29 @@ export default function PolicyListPage({ selected, onToggle, onCompare, onClear 
 
   useEffect(() => {
     setLoading(true);
-    fetchPolicies(query)
+    fetchPolicies(query, category)
       .then((data) => {
         setPolicies(data);
         setError(null);
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, [query]);
+  }, [query, category]);
 
   const selectedIds = useMemo(() => selected.map((policy) => policy.id), [selected]);
+  const title = categoryLabel ? `${categoryLabel} policies` : 'Policy catalog';
 
   return (
     <Stack spacing={3}>
       <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" justifyContent="space-between" spacing={2}>
-        <Typography variant="h4">Policy catalog</Typography>
+        <Stack>
+          <Typography variant="h4">{title}</Typography>
+          {categoryLabel && (
+            <Typography variant="body2" color="text.secondary">
+              Browse all {categoryLabel.toLowerCase()} plans available for comparison.
+            </Typography>
+          )}
+        </Stack>
         <TextField
           label="Search policies"
           value={query}
@@ -54,6 +64,8 @@ export default function PolicyListPage({ selected, onToggle, onCompare, onClear 
       )}
       {loading ? (
         <CircularProgress />
+      ) : policies.length === 0 ? (
+        <Alert severity="info">No policies found for this category or search term.</Alert>
       ) : (
         <Grid container spacing={3}>
           {policies.map((policy) => (
