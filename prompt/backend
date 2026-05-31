@@ -1,0 +1,55 @@
+Project: PolicyCompare — Backend Prompt
+
+Goal
+- Generate a Python backend (FastAPI) that provides policy data and comparison APIs. Include an easy-to-run local data store (SQLite) and instructions to switch to Postgres for production.
+- Provide seed data and a simple admin script to import policies from JSON/CSV.
+
+Is a DB required?
+- For any non-trivial app that stores policies persistently, a DB is recommended. For a prototype or single-developer local app, SQLite is perfectly sufficient (lightweight, zero-config, ACID).
+- Recommendation: Use SQLite for local/dev (default). For production or multi-user concurrency, use Postgres.
+
+Stack & Tooling
+- Python 3.10+
+- FastAPI
+- Uvicorn for server
+- SQLModel (or SQLAlchemy + pydantic) for ORM + models (recommend SQLModel for DX)
+- Alembic optional for migrations (note: SQLModel + Alembic config)
+- Requirements: `fastapi uvicorn[standard] sqlmodel databases[sqlite] pydantic` (provide `requirements.txt`)
+
+API Spec
+- GET /api/policies
+  - Query params: page, page_size, q (search), tags (comma list)
+  - Returns paginated list of policies
+- GET /api/policies/{id}
+  - Returns detailed policy
+- POST /api/compare
+  - Body: { ids: string[] } (limit 2-4)
+  - Returns combined object for UI consumption (aligned sections, diff hints)
+- POST /api/seed (dev-only)
+  - Seeds DB from provided JSON file
+
+Data Model (SQLModel)
+- Policy: id (uuid), title, description, effective_date (date), issuer, tags (JSON/text), sections (JSON), last_updated, source_url
+- Section: represented as a nested JSON list inside Policy for simplicity (avoid separate table initially)
+
+Implementation Details
+- Enable CORS for local frontend (`VITE_API_URL` origin)
+- Provide dependency for DB session and clean teardown
+- Validation: enforce compare IDs limit to 4 and return 400 if exceeded
+- Provide a `scripts/seed.py` to populate sample policies (10-20 items) with realistic fields
+- Provide OpenAPI docs (FastAPI auto-docs)
+
+Dev & Run Commands (generate)
+- `python -m venv .venv`
+- `pip install -r requirements.txt`
+- `uvicorn app.main:app --reload --port 8000`
+
+Deliverables when this prompt is executed
+- A runnable FastAPI project with SQLModel + SQLite integration, seed script, tests for endpoints, and clear README with run instructions and how to switch to Postgres.
+
+Notes for automated generator
+- Keep file structure clear: `app/main.py`, `app/models.py`, `app/crud.py`, `app/schemas.py`, `app/api.py`, `scripts/seed.py`, `requirements.txt`, `Dockerfile` (optional).
+- Add meaningful error handling and input validation.
+- Ensure CORS and environment-driven config for DB URL.
+
+End of backend prompt.

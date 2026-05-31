@@ -1,0 +1,76 @@
+Project: PolicyCompare — Frontend Prompt
+
+Goal
+- Generate a complete, production-friendly React frontend (Vite + TypeScript) using Material UI (MUI).
+- UI must fetch policy data from a backend API and allow the user to select up to 4 policies to compare side-by-side.
+- Clean, minimal, accessible, responsive design with good UX patterns.
+
+Stack & Tooling
+- Vite + React + TypeScript
+- MUI v5 (components + theming)
+- React Router
+- SWR or React Query for data fetching (recommend React Query)
+- ESLint + Prettier config
+
+App Structure (generate these files + folders)
+- src/
+  - main.tsx (app entry, theme provider, router)
+  - App.tsx (routes)
+  - pages/
+    - PolicyListPage.tsx (list with search/filter, multi-select)
+    - PolicyComparePage.tsx (compare up to 4 policies side-by-side)
+  - components/
+    - PolicyCard.tsx (compact card for list)
+    - PolicyTable.tsx (table layout for compare)
+    - Header.tsx (top app bar, search, compare counter)
+    - FloatingCompareTray.tsx (persisted bottom tray showing selected items)
+  - services/
+    - api.ts (fetch wrapper using fetch or axios)
+    - policyClient.ts (typed methods: listPolicies, getPolicy, comparePolicies)
+  - hooks/
+    - usePolicies.ts (React Query hooks)
+  - types/
+    - policy.ts (Policy type interface)
+  - styles/
+    - theme.ts (MUI theme with light neutral design)
+  - utils/
+    - formatters.ts
+
+Data & UX Requirements
+- Policy type fields: id, title, description, effectiveDate, issuer, tags[], sections[] (section has title and content), lastUpdated, sourceUrl.
+- PolicyList: support server-side pagination, client-side search, tag filtering, and multi-select (checkbox) for comparison.
+- Comparison: when user selects 2–4 policies, allow side-by-side view showing key fields and sections aligned. Highlight differences.
+- Limit selection to 4; show clear UI messaging when limit reached.
+- Provide ability to export comparison as PDF (optional; include affordance and placeholder handler).
+
+Accessibility & Performance
+- Keyboard focusable items, semantic HTML, aria labels for compare tray and buttons.
+- Lazy-load policy detail content in compare view (render summary first).
+
+Dev & Run Commands (generate package.json scripts)
+- `npm install`
+- `npm run dev` — run dev server
+- `npm run build` — production build
+- `npm run lint` — ESLint
+- `npm run format` — Prettier
+
+Testing
+- Provide basic unit tests for components using React Testing Library and a sample E2E test with Playwright or Cypress (one example test)
+
+Integration Points
+- API base URL configurable via `.env` (VITE_API_URL)
+- Endpoints used (expected):
+  - GET /api/policies  -> list (supports pagination, search, tags)
+  - GET /api/policies/:id -> single policy
+  - POST /api/compare -> accepts array of ids, returns combined comparison (optional; frontend can also fetch details individually)
+
+Deliverables when this prompt is executed
+- A ready-to-run Vite React TypeScript project with the described structure and components implemented, wired to call the specified backend endpoints, with instructions to run and test.
+
+Notes for automated generator
+- Prefer functional React components + hooks.
+- Keep CSS-in-JS via MUI `sx` and `styled` only.
+- Use TypeScript strict mode, include types for API responses.
+- Add comments with TODO markers where human decisions may be needed (auth, advanced PDF export).
+
+End of frontend prompt.
